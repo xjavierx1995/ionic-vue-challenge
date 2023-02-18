@@ -3,7 +3,14 @@
 			<ion-header :translucent="true">
 				<ion-toolbar>
 					<ion-title>Blank</ion-title>
+					<ion-buttons slot="start">
+					<ion-button @click="getPokemonListFiltered()">
+						<ion-icon slot="start" :icon="add"></ion-icon>
+						Click me
+					</ion-button>
+				</ion-buttons>
 				</ion-toolbar>
+				
 			</ion-header>
 
 			<ion-content :fullscreen="true">
@@ -20,14 +27,6 @@
 						>
 							{{ page }}
 						</ion-button>
-						<!-- <button
-							v-for="page in store.totalPages"
-							:key="page"
-							:class="{ active: page === store.page }"
-							@click="getPokemonsList(page)"
-						>
-							{{ page }}
-						</button> -->
 					</div>
 				</div>
 			</ion-content>
@@ -35,14 +34,26 @@
 </template>
 
 <script setup lang="ts">
-	import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/vue';
-	import { onMounted } from 'vue';
+	import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonButtons, IonIcon } from '@ionic/vue';
+	import { add } from "ionicons/icons";
+	import { onMounted, reactive } from 'vue';
 	import { pokemonStore } from '@/store/pokemon.store';
+	import { PokemonFilter } from '@/interfaces/pokemonFilter';
 
 	const store = pokemonStore();
 
+	const filters: PokemonFilter = reactive({
+		name: 'pikachu',
+		moves: [],
+		experience: 0,
+	});
+
 	async function getPokemonsList(page?:number) {
 		await store.getPokemons(page);
+	}
+
+	async function getPokemonListFiltered() {
+		await store.getPokemonsFilter(filters);
 	}
 
 	onMounted(() => getPokemonsList());
