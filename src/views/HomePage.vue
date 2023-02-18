@@ -23,6 +23,11 @@
 
 <script setup lang="ts">
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import { pokemonStore } from '@/store/pokemon.store';
+
+const store = pokemonStore();
+
+store.getPokemons();
 </script>
 
 <style scoped>

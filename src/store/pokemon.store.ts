@@ -1,14 +1,7 @@
+import { PokemonList } from "@/interfaces/pokemonList"
 import { defineStore } from "pinia"
+import axios from '../plugins/axios';
 
-interface Pokemon{
-	name: string;
-	url: string;
-	detail?: any
-}
-
-interface PokemonList{
-	pokemonList: Pokemon[]
-}
 export const pokemonStore = defineStore('pokemon', {
   state: () => ({
 		pokemonList: []
@@ -18,7 +11,14 @@ export const pokemonStore = defineStore('pokemon', {
   },
   actions: {
     getPokemons() {
-      
+      axios.get('pokemon').then(function (response: any) {
+				// handle success
+				console.log(response);
+			})
+			.catch(function (error: any) {
+				// handle error
+				console.log(error);
+			})
     },
   },
 })
