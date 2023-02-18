@@ -1,33 +1,52 @@
 <template>
-  <ion-page>
-    <ion-header :translucent="true">
-      <ion-toolbar>
-        <ion-title>Blank</ion-title>
-      </ion-toolbar>
-    </ion-header>
+		<ion-page>
+			<ion-header :translucent="true">
+				<ion-toolbar>
+					<ion-title>Blank</ion-title>
+				</ion-toolbar>
+			</ion-header>
 
-    <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Blank</ion-title>
-        </ion-toolbar>
-      </ion-header>
-
-      <div id="container">
-        <strong>Ready to create an app?</strong>
-        <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-      </div>
-    </ion-content>
-  </ion-page>
+			<ion-content :fullscreen="true">
+				<div>
+					<div v-for="pokemon in store.pokemonList" :key="pokemon.name">
+						{{ pokemon.name }}
+					</div>
+					<div>
+						<ion-button 
+							v-for="page in store.totalPages"
+							:key="page"
+							:class="{ active: page === store.page }"
+							@click="getPokemonsList(page)"
+						>
+							{{ page }}
+						</ion-button>
+						<!-- <button
+							v-for="page in store.totalPages"
+							:key="page"
+							:class="{ active: page === store.page }"
+							@click="getPokemonsList(page)"
+						>
+							{{ page }}
+						</button> -->
+					</div>
+				</div>
+			</ion-content>
+		</ion-page>
 </template>
 
 <script setup lang="ts">
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
-import { pokemonStore } from '@/store/pokemon.store';
+	import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/vue';
+	import { onMounted } from 'vue';
+	import { pokemonStore } from '@/store/pokemon.store';
 
-const store = pokemonStore();
+	const store = pokemonStore();
 
-store.getPokemons();
+	async function getPokemonsList(page?:number) {
+		await store.getPokemons(page);
+	}
+
+	onMounted(() => getPokemonsList());
+	
 </script>
 
 <style scoped>
