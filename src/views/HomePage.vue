@@ -16,7 +16,8 @@
 			<ion-content :fullscreen="true">
 				<div>
 					<div v-for="pokemon in (filterActive ? dataFiltered : store.pokemonList)" :key="pokemon.name">
-						{{ pokemon.name }}
+						<!-- {{ pokemon.name }} -->
+						<PokemonCard :pokemon="pokemon" />
 					</div>
 					<div>
 						<ion-button 
@@ -35,6 +36,7 @@
 
 <script setup lang="ts">
 	import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonButtons, IonIcon } from '@ionic/vue';
+	import PokemonCard from '@/components/pokemonCard.vue';
 	import { add } from "ionicons/icons";
 	import { onMounted, reactive, ref, Ref } from 'vue';
 	import { pokemonStore } from '@/store/pokemon.store';

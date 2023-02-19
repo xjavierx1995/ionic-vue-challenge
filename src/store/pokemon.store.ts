@@ -9,7 +9,7 @@ export const pokemonStore = defineStore('pokemon', {
   state: () => ({
 		pokemonList: [],
 		page: 1,
-		pageSize: 20,
+		pageSize: 10,
 		total: 0,
 		totalPages: 0,
 		filters: {
