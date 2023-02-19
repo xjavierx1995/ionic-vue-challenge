@@ -31,17 +31,25 @@
 					</div>
 				</div>
 			</ion-content>
+
+			<ion-footer>
+				<ion-toolbar>
+					<PaginationComponent/>
+				</ion-toolbar>
+			</ion-footer>
 		</ion-page>
 </template>
 
 <script setup lang="ts">
-	import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonButtons, IonIcon } from '@ionic/vue';
+	import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonButtons, IonIcon, IonFooter } from '@ionic/vue';
 	import PokemonCard from '@/components/pokemonCard.vue';
 	import { add } from "ionicons/icons";
 	import { onMounted, reactive, ref, Ref } from 'vue';
 	import { pokemonStore } from '@/store/pokemon.store';
 	import { PokemonFilter } from '@/interfaces/pokemonFilter';
 	import { Pokemon } from '@/interfaces/pokemon';
+	import PaginationComponent from '@/components/paginationComponent.vue';
+
 
 	const store = pokemonStore();
 
