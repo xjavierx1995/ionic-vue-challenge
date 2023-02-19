@@ -14,25 +14,12 @@
 			</ion-header>
 
 			<ion-content :fullscreen="true">
-				<div>
 					<div v-for="pokemon in (filterActive ? dataFiltered : store.pokemonList)" :key="pokemon.name">
-						<!-- {{ pokemon.name }} -->
 						<PokemonCard :pokemon="pokemon" />
 					</div>
-					<div>
-						<ion-button 
-							v-for="page in store.totalPages"
-							:key="page"
-							:class="{ active: page === store.page }"
-							@click="filterActive ? paginatedLocalData(page) : getPokemonsList(page)"
-						>
-							{{ page }}
-						</ion-button>
-					</div>
-				</div>
 			</ion-content>
 
-			<ion-footer>
+			<ion-footer mode="md">
 				<ion-toolbar>
 					<PaginationComponent/>
 				</ion-toolbar>
@@ -62,8 +49,8 @@
 	const filterActive: Ref<boolean> = ref(false);
 	const dataFiltered: Ref<Pokemon[]> = ref([]);
 
-	async function getPokemonsList(page?:number) {
-		await store.getPokemons(page);
+	async function getPokemonsList() {
+		await store.getPokemons();
 	}
 
 	async function getPokemonListFiltered() {// TODO: esta funcion deberia ir en el modal de filtros
@@ -72,12 +59,10 @@
 		paginatedLocalData();
 	}
 
-	function paginatedLocalData(page = 1) {
+	function paginatedLocalData(page = 1) {//TODO: esto deberia ir en el store?
 		const startIndex = (page - 1) * store.pageSize;
 		const endIndex = startIndex + store.pageSize;
 		dataFiltered.value = store.pokemonList.slice(startIndex, endIndex);
-		console.log(dataFiltered);
-		
   }
 
 	onMounted(() => getPokemonsList());
