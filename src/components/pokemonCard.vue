@@ -19,8 +19,8 @@
 	</ion-card>
 </template>
 <script setup lang="ts">
- import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/vue';
-import { toRefs, defineProps } from 'vue';
+ 	import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonButton, IonChip } from '@ionic/vue';
+	import { toRefs, defineProps } from 'vue';
 	import { Pokemon } from '@/interfaces/pokemon';
 
 	const props = defineProps<{ 
