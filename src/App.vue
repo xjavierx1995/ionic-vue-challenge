@@ -15,4 +15,12 @@ import { IonApp, IonRouterOutlet } from '@ionic/vue';
     --padding-start: 16px;
 		font-family: 'Roboto' !important;
 	}
+
+	h2{
+		font-family: 'Readex Pro';
+		font-style: normal;
+		font-weight: 500;
+		font-size: 3.3vh;
+		line-height: 28px;
+	}
 </style>

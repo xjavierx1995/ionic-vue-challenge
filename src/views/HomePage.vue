@@ -1,41 +1,30 @@
 <template>
-		<ion-page>
-			<ion-header :translucent="true">
-				<ion-toolbar>
-					<ion-title>Blank</ion-title>
-					<ion-buttons slot="start">
-					<ion-button @click="getPokemonListFiltered()">
-						<ion-icon slot="start" :icon="add"></ion-icon>
-						Click me
-					</ion-button>
-				</ion-buttons>
-				</ion-toolbar>
-				
-			</ion-header>
+	<ion-page>
+		<HeaderSearch></HeaderSearch>
 
-			<ion-content :fullscreen="true">
-					<div v-for="pokemon in (filterActive ? dataFiltered : store.pokemonList)" :key="pokemon.name">
-						<PokemonCard :pokemon="pokemon" />
-					</div>
-			</ion-content>
+		<ion-content :fullscreen="true">
+				<div v-for="pokemon in (filterActive ? dataFiltered : store.pokemonList)" :key="pokemon.name">
+					<PokemonCard :pokemon="pokemon" />
+				</div>
+		</ion-content>
 
-			<ion-footer class="ion-no-border" mode="md">
-				<ion-toolbar>
-					<PaginationComponent/>
-				</ion-toolbar>
-			</ion-footer>
-		</ion-page>
+		<ion-footer class="ion-no-border" mode="md">
+			<ion-toolbar>
+				<PaginationComponent/>
+			</ion-toolbar>
+		</ion-footer>
+	</ion-page>
 </template>
 
 <script setup lang="ts">
-	import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonButtons, IonIcon, IonFooter } from '@ionic/vue';
+	import { IonContent, IonPage, IonToolbar, IonFooter } from '@ionic/vue';
 	import PokemonCard from '@/components/pokemonCard.vue';
-	import { add } from "ionicons/icons";
 	import { onMounted, reactive, ref, Ref } from 'vue';
 	import { pokemonStore } from '@/store/pokemon.store';
 	import { PokemonFilter } from '@/interfaces/pokemonFilter';
 	import { Pokemon } from '@/interfaces/pokemon';
 	import PaginationComponent from '@/components/paginationComponent.vue';
+	import HeaderSearch from '@/components/headerSearch.vue';
 
 
 	const store = pokemonStore();
