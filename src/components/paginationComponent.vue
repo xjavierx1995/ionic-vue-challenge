@@ -5,7 +5,7 @@
 		hideFirstButton
 		hideLastButton
     :range-size="1"
-    active-color="#DCEDFF"
+    active-color="#072AC8"
 		@update:modelValue="getPokemonsList"
   />
 </template>
@@ -23,8 +23,31 @@ import { ref } from "vue";
 	}
 
 </script>
-<style scoped lang="css">
+<style lang="scss">
 	.Pagination{
-		justify-content: center;
+		justify-content: center;		
+
+		.PaginationControl{
+			.Control{
+				&.Control-active{
+					fill: #072AC8;
+				}
+			}
+		}
+		
+		.Page {
+			width: 40px;
+			height: 40px;
+			color: #8d91a5;
+			&.Page-active{
+				color: #fdfdfd;
+				border-radius: 4px;
+				width: 40px;
+				height: 40px;
+				font-weight: 500;
+				font-size: 14px;
+				line-height: 20px;	
+			}
+		}
 	}
 </style>
