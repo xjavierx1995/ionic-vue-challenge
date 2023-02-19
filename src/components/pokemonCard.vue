@@ -1,5 +1,5 @@
 <template>
-	<ion-card>
+	<ion-card button>
 		<div class="image-container">
 			<img 
 			style="height: 159px;"
@@ -16,20 +16,24 @@
 		</ion-card-content>
 
 		<div class="type-container">
-			<ion-chip v-for="(type, index) in pokemon.detail.types" :key="index" color="medium">{{ type.type.name }}</ion-chip>
+			<ion-chip v-for="(type, index) in pokemon.detail.types" :key="index">
+				<ion-avatar>
+					<img :src="TypesIcons[type.type.name]" />
+				</ion-avatar>
+				<ion-label>{{ type.type.name }}</ion-label>
+				
+			</ion-chip>
 		</div>
-		<!-- <ion-button v-for="(type, index) in pokemon.detail.types" :key="index" fill="clear" >
-			<ion-chip color="medium">{{ type.type.name }}</ion-chip>
-		</ion-button> -->
 	</ion-card>
 </template>
 <script setup lang="ts">
- import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonButton, IonChip } from '@ionic/vue';
+ 	import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonChip, IonLabel, IonAvatar } from '@ionic/vue';
 	import { toRefs, defineProps } from 'vue';
 	import { Pokemon } from '@/interfaces/pokemon';
+	import { TypesIcons } from '@/helpers/types';
 
 	const props = defineProps<{ 
-	pokemon: Pokemon
+		pokemon: Pokemon
 	}>();	
 
 	const { pokemon } = toRefs(props);
@@ -75,6 +79,17 @@
 		width: 296px;
 		height: 32px;
 
+		ion-chip{
+			--background: #ececf2;
+			--color: #8d91a5;
+			ion-avatar{
+				margin: auto;
+				img{
+					width: 10.66px;
+					height: 13.34px;
+				}
+			}
+		}
 	}
 
 	.image-container{
