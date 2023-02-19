@@ -85,8 +85,8 @@
 			ion-avatar{
 				margin: auto;
 				img{
-					width: 10.66px;
-					height: 13.34px;
+					width: 16px;
+					height: 16px;
 				}
 			}
 		}
