@@ -1,9 +1,9 @@
 <template>
-	<ion-header>
+	<ion-header >
 		<ion-toolbar class="ion-no-border">
 			<img src="assets/images/pokeball_background.png">
 
-			<div class="title"><!-- What pokemon are you looking for? -->
+			<div class="title">
 			
 				<h2>What pokemon are you looking for?</h2>
 			</div>
@@ -14,18 +14,20 @@
 					<ion-input @ionChange="search" :debounce="2000" v-model="store.filters.name"></ion-input>
 					<ion-icon :icon="searchOutline" slot="end"></ion-icon>
 				</ion-item>
-				<ion-button fill="clear">
+				<ion-button fill="clear" id="open-modal" @click="openModal()">
 					<ion-icon slot="icon-only" :icon="options"></ion-icon>
 				</ion-button>
 			</div>
 			
 		</ion-toolbar>
 	</ion-header>
+	<!-- <FilterModal/> -->
 </template>
 <script setup lang="ts">
 	import { pokemonStore } from '@/store/pokemon.store';
-	import { IonHeader, IonToolbar, IonIcon, IonItem, IonInput, IonLabel, IonButton } from '@ionic/vue';
+	import { IonHeader, IonToolbar, IonIcon, IonItem, IonInput, IonLabel, IonButton, modalController } from '@ionic/vue';
 	import { searchOutline, options } from 'ionicons/icons'
+	import FilterModal from '@/components/filltersModal.vue'
 
 	const store = pokemonStore();
 
@@ -34,13 +36,24 @@
 		
 		store.getPokemonsFilter();
 	}
+
+	async function openModal() {
+		const modal = await modalController.create({
+          component: FilterModal,
+        });
+        modal.present();
+
+        const { data, role } = await modal.onWillDismiss();
+
+	}
 </script>
 <style scoped lang="scss">
 	ion-toolbar{
 		--background: #072AC8;
 		--min-height: 234px;
 		--color: white;
-
+		--border-style: none;
+		--border-width: 0;
 		img{
 			position: absolute;
 			right: 0;

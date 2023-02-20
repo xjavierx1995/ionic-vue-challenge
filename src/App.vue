@@ -6,8 +6,14 @@
 
 <script setup lang="ts">
 import { IonApp, IonRouterOutlet } from '@ionic/vue';
+import { onMounted } from 'vue';
+import { moveStore } from './store/move.store';
+const store = moveStore();
+
+onMounted(async () => await store.getMoves());
 </script>
 <style lang="scss">
+	@import "@hennge/vue3-pagination/dist/vue3-pagination.css";
 	@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@500&family=Roboto&display=swap');
 	ion-content{
 		--background: #dcdde8;

@@ -1,8 +1,8 @@
 import { Pokemon } from "./pokemon";
 
-export interface PokemonListResponse {
+export interface ListResponse<T> {
 	count: string;
 	next: number;
 	previous: string;
-	results: Pokemon[];
+	results: T;
 }

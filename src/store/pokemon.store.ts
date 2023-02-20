@@ -1,6 +1,6 @@
 import { Pokemon } from "@/interfaces/pokemon";
 import { PokemonState } from "@/interfaces/pokemonList"
-import { PokemonListResponse } from "@/interfaces/pokemonListResponse";
+import { ListResponse } from "@/interfaces/ListResponse";
 import { defineStore } from "pinia"
 import axios from '../plugins/axios';
 
@@ -41,7 +41,7 @@ export const pokemonStore = defineStore('pokemon', {
 				this.isLoading = true;
 				const offset = (this.page - 1) * this.pageSize;
 
-				const pokemonData = await axios.get<PokemonListResponse>(`pokemon?limit=${this.pageSize}&offset=${offset}`);
+				const pokemonData = await axios.get<ListResponse<Pokemon[]>>(`pokemon?limit=${this.pageSize}&offset=${offset}`);				
 				const promises = pokemonData.data.results.map(async (e: Omit<Pokemon, 'detail'>): Promise<Pokemon> => {
 
 					const res = await axios.get(`pokemon/${e.name}`)
@@ -66,7 +66,7 @@ export const pokemonStore = defineStore('pokemon', {
 			try {
 				this.isLoading = true;
 				if (!this.isFilterActive) {
-					const pokemonData = await axios.get<PokemonListResponse>(`pokemon?limit=100000`);
+					const pokemonData = await axios.get<ListResponse<Pokemon[]>>(`pokemon?limit=100000`);
 					const promises = pokemonData.data.results.map(async (e: Omit<Pokemon, 'detail'>): Promise<Pokemon> => {
 
 						const res = await axios.get(`pokemon/${e.name}`)
@@ -83,11 +83,11 @@ export const pokemonStore = defineStore('pokemon', {
 				
 				if (this.hasFilter) {
 					
-					this.pokemonList = this.allPokemon.filter((pokemon) =>{
+					this.pokemonList = await this.allPokemon.filter((pokemon) =>{
 							if (this.filters.name !== '' && pokemon.name.includes(this.filters.name)) {
 								return true;
 							}
-							if (this.filters.moves.length > 0 && this.filters.moves.every((move) => pokemon.detail.moves.some((m) => m.move.name.includes(move))) ) {
+							if (this.filters.moves.length > 0 && this.filters.moves.some((move) => pokemon.detail.moves.some((m) => m.move.name.includes(move))) ) {
 								return true;
 							}
 							if (this.filters.experience != 0 && pokemon.detail.base_experience == this.filters.experience) {
@@ -98,6 +98,7 @@ export const pokemonStore = defineStore('pokemon', {
 				}else{
 					this.pokemonList = this.allPokemon
 				}
+				console.log(this.pokemonList);
 				
 				this.page = 1;
 				this.total = this.pokemonList.length;

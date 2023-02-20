@@ -2,7 +2,8 @@
 	<ion-page>
 		<HeaderSearch></HeaderSearch>
 
-		<ion-content :fullscreen="true">
+		<ion-content>
+			<!-- TODO: colocar el total de items -->
 				<div v-if="!store.isLoading" >
 					<PokemonCard 
 						v-for="pokemon in (store.isFilterActive ? store.paginatedLocalData : store.pokemonList)" 
