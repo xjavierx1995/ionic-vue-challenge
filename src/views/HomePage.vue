@@ -3,7 +3,7 @@
 		<HeaderSearch></HeaderSearch>
 
 		<ion-content :fullscreen="true">
-				<div v-for="pokemon in (filterActive ? dataFiltered : store.pokemonList)" :key="pokemon.name">
+				<div v-for="pokemon in (store.isFilterActive ? store.paginatedLocalData : store.pokemonList)" :key="pokemon.name">
 					<PokemonCard :pokemon="pokemon" />
 				</div>
 		</ion-content>
@@ -19,42 +19,15 @@
 <script setup lang="ts">
 	import { IonContent, IonPage, IonToolbar, IonFooter } from '@ionic/vue';
 	import PokemonCard from '@/components/pokemonCard.vue';
-	import { onMounted, reactive, ref, Ref } from 'vue';
+	import { onMounted } from 'vue';
 	import { pokemonStore } from '@/store/pokemon.store';
-	import { PokemonFilter } from '@/interfaces/pokemonFilter';
-	import { Pokemon } from '@/interfaces/pokemon';
 	import PaginationComponent from '@/components/paginationComponent.vue';
 	import HeaderSearch from '@/components/headerSearch.vue';
 
 
 	const store = pokemonStore();
 
-	const filters: PokemonFilter = reactive({
-		name: 'pikachu',
-		moves: [],
-		experience: 0,
-	});
-
-	const filterActive: Ref<boolean> = ref(false);
-	const dataFiltered: Ref<Pokemon[]> = ref([]);
-
-	async function getPokemonsList() {
-		await store.getPokemons();
-	}
-
-	async function getPokemonListFiltered() {// TODO: esta funcion deberia ir en el modal de filtros
-		filterActive.value = true;
-		await store.getPokemonsFilter(filters);
-		paginatedLocalData();
-	}
-
-	function paginatedLocalData(page = 1) {//TODO: esto deberia ir en el store?
-		const startIndex = (page - 1) * store.pageSize;
-		const endIndex = startIndex + store.pageSize;
-		dataFiltered.value = store.pokemonList.slice(startIndex, endIndex);
-  }
-
-	onMounted(() => getPokemonsList());
+	onMounted(async () => await store.getPokemons());
 	
 </script>
 

@@ -1,7 +1,7 @@
 <template>
 	<v-pagination
-    v-model="page"
-    :pages="store.pageSize"
+    v-model="store.page"
+    :pages="store.totalPages"
 		hideFirstButton
 		hideLastButton
     :range-size="1"
@@ -13,13 +13,15 @@
 import { pokemonStore } from "@/store/pokemon.store";
 import VPagination from "@hennge/vue3-pagination";
 import "@hennge/vue3-pagination/dist/vue3-pagination.css";
-import { ref } from "vue";
 
-	const page = ref(1)
 	const store = pokemonStore();
 
-	async function getPokemonsList(page?:number) {
-		await store.getPokemons(page);
+	async function getPokemonsList() {
+		if (store.isFilterActive) {
+			store.paginatedLocalData;
+		}else{
+			await store.getPokemons();
+		}
 	}
 
 </script>
