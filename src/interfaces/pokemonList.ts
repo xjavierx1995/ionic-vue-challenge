@@ -1,7 +1,7 @@
 import { Pokemon } from "./pokemon";
 import { PokemonFilter } from "./pokemonFilter";
 
-export interface PokemonList{
+export interface PokemonState{
 	pokemonList: Pokemon[];
 	filters: PokemonFilter;
 	isFilterActive: boolean;
@@ -10,4 +10,5 @@ export interface PokemonList{
 	pageSize: number;
 	total: number;
 	totalPages: number;
+	isLoading: boolean;
 }

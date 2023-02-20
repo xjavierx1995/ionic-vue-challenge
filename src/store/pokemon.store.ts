@@ -1,5 +1,5 @@
 import { Pokemon } from "@/interfaces/pokemon";
-import { PokemonList } from "@/interfaces/pokemonList"
+import { PokemonState } from "@/interfaces/pokemonList"
 import { PokemonListResponse } from "@/interfaces/pokemonListResponse";
 import { defineStore } from "pinia"
 import axios from '../plugins/axios';
@@ -12,13 +12,14 @@ export const pokemonStore = defineStore('pokemon', {
 		pageSize: 10,
 		total: 0,
 		totalPages: 0,
+		isLoading: false,
 		isFilterActive: false,
 		filters: {
 			experience: 0,
 			moves: [],
 			name: ''
 		}
-	} as PokemonList),
+	} as PokemonState),
   getters: {
     getPokemonList: (state) => state.pokemonList,
     hasFilter: (state) => {
@@ -35,8 +36,9 @@ export const pokemonStore = defineStore('pokemon', {
   },
   actions: {
     async getPokemons() {
-			this.isFilterActive = false;
 			try {
+				this.isFilterActive = false;
+				this.isLoading = true;
 				const offset = (this.page - 1) * this.pageSize;
 
 				const pokemonData = await axios.get<PokemonListResponse>(`pokemon?limit=${this.pageSize}&offset=${offset}`);
@@ -53,15 +55,16 @@ export const pokemonStore = defineStore('pokemon', {
 				this.total = parseInt(pokemonData.data.count);
 				this.totalPages = Math.ceil(this.total / this.pageSize);
 				this.pokemonList = await Promise.all(promises);
-				
+				this.isLoading = false;
 			} catch (error) {
 				console.log(error);	
+				this.isLoading = false;
 			}
       
     },
     async getPokemonsFilter() {
 			try {
-				
+				this.isLoading = true;
 				if (!this.isFilterActive) {
 					const pokemonData = await axios.get<PokemonListResponse>(`pokemon?limit=100000`);
 					const promises = pokemonData.data.results.map(async (e: Omit<Pokemon, 'detail'>): Promise<Pokemon> => {
@@ -101,8 +104,10 @@ export const pokemonStore = defineStore('pokemon', {
 				this.totalPages = Math.ceil(this.total / this.pageSize);
 
 				this.isFilterActive = true;
+				this.isLoading = false;
 			} catch (error) {
 				console.log(error);	
+				this.isLoading = false;
 			}
       
     },

@@ -3,8 +3,14 @@
 		<HeaderSearch></HeaderSearch>
 
 		<ion-content :fullscreen="true">
-				<div v-for="pokemon in (store.isFilterActive ? store.paginatedLocalData : store.pokemonList)" :key="pokemon.name">
-					<PokemonCard :pokemon="pokemon" />
+				<div v-if="!store.isLoading" >
+					<PokemonCard 
+						v-for="pokemon in (store.isFilterActive ? store.paginatedLocalData : store.pokemonList)" 
+						:key="pokemon.name" 
+						:pokemon="pokemon" />
+				</div>
+				<div v-else>
+					<PokemonCardLoading v-for="i in 10" :key="i"/>
 				</div>
 		</ion-content>
 
@@ -19,6 +25,7 @@
 <script setup lang="ts">
 	import { IonContent, IonPage, IonToolbar, IonFooter } from '@ionic/vue';
 	import PokemonCard from '@/components/pokemonCard.vue';
+	import PokemonCardLoading from '@/components/pokemonCardLoading.vue';
 	import { onMounted } from 'vue';
 	import { pokemonStore } from '@/store/pokemon.store';
 	import PaginationComponent from '@/components/paginationComponent.vue';
