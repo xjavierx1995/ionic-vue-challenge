@@ -56,7 +56,6 @@ import { pokemonStore } from '@/store/pokemon.store';
 			IonToolbar,
 			IonIcon,
 			IonItem,
-			IonInput,
 			IonLabel,
 			modalController,
 			IonSelect,
@@ -83,11 +82,6 @@ import { pokemonStore } from '@/store/pokemon.store';
 		modalController.dismiss(null, 'cancel');
 	}
 
-	function compareWith(o1: any, o2: any) {
-		console.log(o1, o2);
-		
-		return o1 && o2 ? o1 === o2 : o1 === o2;
-	}
 </script>
 <style scoped lang="scss">
 	ion-modal{
