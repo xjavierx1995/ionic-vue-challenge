@@ -82,23 +82,39 @@ export const pokemonStore = defineStore('pokemon', {
 
 				
 				if (this.hasFilter) {
-					
-					this.pokemonList = await this.allPokemon.filter((pokemon) =>{
-							if (this.filters.name !== '' && pokemon.name.includes(this.filters.name)) {
-								return true;
-							}
-							if (this.filters.moves.length > 0 && this.filters.moves.some((move) => pokemon.detail.moves.some((m) => m.move.name.includes(move))) ) {
-								return true;
-							}
-							if (this.filters.experience != 0 && pokemon.detail.base_experience == this.filters.experience) {
+					let filtered = this.allPokemon
+					if (this.filters.name !== '') {
+						
+						filtered = filtered.filter((pokemon) =>{
+								if (pokemon.name.includes(this.filters.name)) {
+									return true;
+								}
+								return false;
+						});
+					}
+
+					if (this.filters.moves.length > 0) {
+						filtered = filtered.filter((pokemon) =>{
+								if (this.filters.moves.some((move) => pokemon.detail.moves.some((m) => m.move.name.includes(move))) ) {
+									return true;
+								}
+								return false;
+						});
+					}
+
+					if (this.filters.experience != 0) {	
+						filtered = filtered.filter((pokemon) =>{
+							if (pokemon.detail.base_experience == this.filters.experience) {
 								return true;
 							}
 							return false;
-					});
+						});
+					}
+
+					this.pokemonList = filtered;
 				}else{
 					this.pokemonList = this.allPokemon
 				}
-				console.log(this.pokemonList);
 				
 				this.page = 1;
 				this.total = this.pokemonList.length;

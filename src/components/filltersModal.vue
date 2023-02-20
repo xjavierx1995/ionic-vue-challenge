@@ -11,18 +11,27 @@
 	<ion-content class="ion-padding-horizontal">
 		<h2>Filtrer pokemon list</h2>
 		<ion-item>
-			<ion-label position="stacked">Enter your name</ion-label>
-			<ion-input ref="input" type="text" placeholder="Your name"></ion-input>
-		</ion-item>
-		<ion-item>
+			<ion-label position="floating">Select movement number</ion-label>
     	<ion-select 
 				:multiple="true" 
 				mode="md"
 				:value="filters.moves"
 				@ionChange="filters.moves = $event.detail.value" 
 				interface="popover" 
-				placeholder="Select movement number">
+			>
 				<ion-select-option v-for="item in store.moveList" :key="item.name" :value="item.name">{{ item.name }}</ion-select-option>
+			</ion-select>
+		</ion-item>
+		<ion-item>
+			<ion-label position="floating">Select experience level</ion-label>
+    	<ion-select 
+				mode="md"
+				:value="filters.experience"
+				@ionChange="filters.experience = $event.detail.value"
+				interface="popover" 
+				>
+				<ion-select-option :key="0" :value="0">Seleccionar</ion-select-option>
+				<ion-select-option v-for="i in 255" :key="i" :value="i">{{ i }}</ion-select-option>
 			</ion-select>
 		</ion-item>
 	</ion-content>
@@ -61,15 +70,15 @@ import { pokemonStore } from '@/store/pokemon.store';
 
 	const filters = reactive({
 		moves: storePokemon.filters.moves,
-		experience: 0,
+		experience: storePokemon.filters.experience,
 	});
 
 	function cancel() {
 		modalController.dismiss(null, 'cancel');
 	}
 	function confirm() {
-		console.log(filters);
 		storePokemon.filters.moves = filters.moves;
+		storePokemon.filters.experience = filters.experience;
 		storePokemon.getPokemonsFilter();
 		modalController.dismiss(null, 'cancel');
 	}
