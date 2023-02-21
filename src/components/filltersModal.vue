@@ -1,6 +1,6 @@
 <template>
 	<ion-header class="ion-no-border">
-		<ion-toolbar mode="md">
+		<ion-toolbar mode="md"><!-- TODO: esto es transparente -->
 			<ion-buttons slot="start">
 				<ion-button @click="cancel">
 					<ion-icon slot="icon-only" color="blue" :icon="close"></ion-icon>
@@ -92,6 +92,9 @@ import { pokemonStore } from '@/store/pokemon.store';
 		}
 	}
 
+	ion-toolbar{
+		--background: transparent;
+	}
 	.modal-footer{
 		position: fixed;
     bottom: 0;

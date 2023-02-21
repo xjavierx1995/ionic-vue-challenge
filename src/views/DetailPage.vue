@@ -18,59 +18,113 @@
 					:src="pokemonSelected.detail.sprites.other.home.front_default ?? pokemonSelected.detail.sprites.other['official-artwork'].front_default" 
 				>
 			</div>
+			<div class="select-segment">
+				<ion-segment  :value="menu" @ionChange=" menu = $event.detail.value!">
+					<ion-segment-button value="about">
+						<ion-label>About</ion-label>
+					</ion-segment-button>
+					<ion-segment-button value="moves">
+						<ion-label>Moves</ion-label>
+					</ion-segment-button>
+				</ion-segment>
+			</div>
 			
-			<AboutPokemon	:pokemon-detail="pokemonSelected.detail"/>
+			<AboutPokemon v-if="menu === 'about'"	:pokemon-detail="pokemonSelected.detail"/>
 		</ion-content>
 	</ion-page>
 </template>
 <script setup lang="ts">
-	import { IonPage, IonContent, IonHeader, IonToolbar, IonButtons, IonButton, IonIcon } from '@ionic/vue';
+	import { IonPage, IonContent, IonHeader, IonToolbar, IonButtons, IonButton, IonIcon, IonSegment, IonSegmentButton, IonLabel } from '@ionic/vue';
 	import { arrowBack } from 'ionicons/icons'
 	import { pokemonStore } from '@/store/pokemon.store';
-	import { toRefs } from 'vue';
+	import { toRefs, ref } from 'vue';
 	import AboutPokemon from '@/components/aboutPokemon.vue';
 	import { useRouter } from 'vue-router';
 	
 	const router = useRouter();
 	const store = pokemonStore();
 	const { pokemonSelected } = toRefs(store);
+	const menu = ref('about');
 
 
 </script>
 <style setup lang="scss">
 	ion-content{
 		--background: #fdfdfd;
-	}
-	.header-detail{
-		background: #ececf2;
-		width: 100%;
-		height: 237px;
-		display: flex;
-    justify-content: center;
-    align-items: center;
 
-		.pokemon-name{
-			font-family: 'Readex Pro';
-			font-weight: 600;
-			font-size: 24px;
-			line-height: 32px;
-			color: #3B3B3B;
-			position: absolute;
-    	top: 40px;
-			display: flex;
-			gap: 10px;
+		.select-segment{
+			padding: 0 16px;
+			ion-segment {
+				height: 70px;
+				width: 230px;
+				--background: #fdfdfd;
 
-			.order{
-				font-family: 'Readex Pro';
-				font-weight: 500;
-				font-size: 16px;
-				line-height: 32px;
-				color: #3B3B3B;
+				ion-segment-button{
+
+				}
+
+				ion-segment-button {
+					font-family: 'Roboto';
+					font-style: normal;
+					font-weight: 400;
+					font-size: 16px;
+					line-height: 24px;
+
+					--indicator-color: #4361EE;
+					--color: #8D91A5;
+					--color-checked: #4361EE;
+					--indicator-height: 4px;
+
+					&::part(indicator){
+						// background-color: red;
+						top: auto;
+					}
+				}
+
+				/* ion-segment-button::part(indicator-background) {
+					border-radius: 20px;
+				} */
+
+				/* Material Design styles */
+				/* ion-segment-button.md {
+					--color: #000;
+					--color-checked: #08a391;
+					--indicator-height: 4px;
+				} */
 			}
 		}
-		img{
-			width: 146px;
-			height: 143px;
+	
+		.header-detail{
+			background: #ececf2;
+			width: 100%;
+			height: 237px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			.pokemon-name{
+				font-family: 'Readex Pro';
+				font-weight: 600;
+				font-size: 24px;
+				line-height: 32px;
+				color: #3B3B3B;
+				position: absolute;
+				top: 40px;
+				display: flex;
+				gap: 10px;
+
+				.order{
+					font-family: 'Readex Pro';
+					font-weight: 500;
+					font-size: 16px;
+					line-height: 32px;
+					color: #3B3B3B;
+				}
+			}
+			img{
+				width: 146px;
+				height: 143px;
+			}
 		}
 	}
 	ion-toolbar{
