@@ -8,11 +8,13 @@
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
-    "build:android": "vue-cli-service build && npx cap sync android && npx cap open android"
+    "build:android": "vue-cli-service build && npx cap sync android && npx cap open android",
+    "resources": "capacitor-resources -p android,ios"
   },
   "dependencies": {
     "@capacitor/android": "^4.6.3",
     "@capacitor/app": "4.1.1",
+    "@capacitor/assets": "^2.0.4",
     "@capacitor/core": "4.6.3",
     "@capacitor/haptics": "4.1.0",
     "@capacitor/keyboard": "4.1.1",
