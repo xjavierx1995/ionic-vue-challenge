@@ -17,7 +17,7 @@
 				mode="md"
 				:value="filters.moves"
 				@ionChange="filters.moves = $event.detail.value" 
-				interface="popover" 
+				
 			>
 				<ion-select-option v-for="item in store.moveList" :key="item.name" :value="item.name">{{ item.name }}</ion-select-option>
 			</ion-select>

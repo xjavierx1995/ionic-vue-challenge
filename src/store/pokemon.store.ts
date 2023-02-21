@@ -45,6 +45,9 @@ export const pokemonStore = defineStore('pokemon', {
 			try {
 				this.isFilterActive = false;
 				this.isLoading = true;
+				this.filters.experience = 0;
+				this.filters.moves = [];
+				this.filters.name = '';
 				const offset = (this.page - 1) * this.pageSize;
 
 				const pokemonData = await axios.get<ListResponse<Pokemon[]>>(`pokemon?limit=${this.pageSize}&offset=${offset}`);				
@@ -92,7 +95,7 @@ export const pokemonStore = defineStore('pokemon', {
 					if (this.filters.name !== '') {
 						
 						filtered = filtered.filter((pokemon) =>{
-								if (pokemon.name.includes(this.filters.name)) {
+								if (pokemon.name.includes(this.filters.name.toLowerCase())) {
 									return true;
 								}
 								return false;
@@ -134,5 +137,21 @@ export const pokemonStore = defineStore('pokemon', {
 			}
       
     },
+		async refreshPokemon(){
+			if (this.allPokemon.length > 0) {
+				this.pokemonList = this.allPokemon
+			}else{
+				await this.getPokemons();
+			}
+		},
+
+		resetFilters(){
+			this.filters = {
+				experience: 0,
+				moves: [],
+				name: ''
+			}
+			this.page = 1;
+		}
   },
 })

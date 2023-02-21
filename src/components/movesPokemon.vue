@@ -73,7 +73,7 @@
 </script>
 <style lang="scss">
 	ion-col{
-		height: 11vh;
+		height: 13vh;
 		padding: 16px;
 		margin: 7px;
 		// background-color: #135d54;

@@ -3,6 +3,9 @@
 		<HeaderSearch></HeaderSearch>
 
 		<ion-content>
+			<ion-refresher slot="fixed" @ionRefresh="refreshPokemon($event)">
+				<ion-refresher-content></ion-refresher-content>
+			</ion-refresher>
 			<ion-card v-if="store.hasFilter && !store.isLoading">
 				<ion-card-header>
 					<ion-card-title>{{ store.total }} resultados</ion-card-title>
@@ -37,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-	import { IonContent, IonPage, IonToolbar, IonFooter, IonCard, IonCardHeader, IonCardTitle, IonGrid, IonRow, IonCol } from '@ionic/vue';
+	import { IonContent, IonPage, IonToolbar, IonFooter, IonCard, IonCardHeader, IonCardTitle, IonRefresher, IonRefresherContent } from '@ionic/vue';
 	import PokemonCard from '@/components/pokemonCard.vue';
 	import PokemonCardLoading from '@/components/pokemonCardLoading.vue';
 	import { onMounted } from 'vue';
@@ -47,6 +50,11 @@
 
 
 	const store = pokemonStore();
+
+	async function refreshPokemon(e: any) {
+		await store.getPokemons()
+		e.target.complete();
+	}
 
 	onMounted(async () => await store.getPokemons());
 	
