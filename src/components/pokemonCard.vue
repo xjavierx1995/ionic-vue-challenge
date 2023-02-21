@@ -18,7 +18,7 @@
 		<div class="type-container">
 			<ion-chip v-for="(type, index) in pokemon.detail.types" :key="index">
 				<ion-avatar>
-					<img :src="TypesIcons[type.type.name]" />
+					<img :src="TypesIcons[type.type.name].url" />
 				</ion-avatar>
 				<ion-label>{{ type.type.name }}</ion-label>
 				

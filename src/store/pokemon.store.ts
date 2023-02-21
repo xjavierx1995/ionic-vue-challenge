@@ -2,7 +2,7 @@ import { Pokemon } from "@/interfaces/pokemon";
 import { PokemonState } from "@/interfaces/pokemonList"
 import { ListResponse } from "@/interfaces/ListResponse";
 import { defineStore } from "pinia"
-import axios from '../plugins/axios';
+import axios from '@/plugins/axios';
 import { PokemonDetail } from "@/interfaces/pokemonDetail";
 
 export const pokemonStore = defineStore('pokemon', {

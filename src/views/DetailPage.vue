@@ -30,6 +30,7 @@
 			</div>
 			
 			<AboutPokemon v-if="menu === 'about'"	:pokemon-detail="pokemonSelected.detail"/>
+			<MovesPokemon v-if="menu === 'moves'" :pokemon-moves="pokemonSelected.detail.moves" />
 		</ion-content>
 	</ion-page>
 </template>
@@ -39,6 +40,7 @@
 	import { pokemonStore } from '@/store/pokemon.store';
 	import { toRefs, ref } from 'vue';
 	import AboutPokemon from '@/components/aboutPokemon.vue';
+	import MovesPokemon from '@/components/movesPokemon.vue';
 	import { useRouter } from 'vue-router';
 	
 	const router = useRouter();
