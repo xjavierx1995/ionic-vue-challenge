@@ -11,7 +11,7 @@
 			<div class="search">
 				<ion-item fill="solid">
 					<ion-label position="floating">Search pokemon</ion-label>
-					<ion-input @ionChange="search" :debounce="2000" v-model="store.filters.name"></ion-input>
+					<ion-input @ionChange="search" :debounce="1500" v-model="store.filters.name"></ion-input>
 					<ion-icon :icon="searchOutline" slot="end"></ion-icon>
 				</ion-item>
 				<ion-button fill="clear" id="open-modal" @click="openModal()">

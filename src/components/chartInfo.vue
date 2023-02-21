@@ -82,8 +82,13 @@
   onMounted(() => setupChart())
 </script>
 <style lang="scss">
+	#myChart{
+		width: 90% !important;
+    height: 25vh !important;
+    margin: auto;
+	}
 	.chart-container{
-		max-width: 43vh;
+		max-width: 70vh;
 		margin: auto;
 	}
 </style>
