@@ -32,7 +32,7 @@ onBeforeMount(async () => {
 		font-family: 'Readex Pro';
 		font-style: normal;
 		font-weight: 500;
-		font-size: 3.3vh;
+		font-size: 2.8vh !important;
 		line-height: 28px;
 	}
 </style>

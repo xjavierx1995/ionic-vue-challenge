@@ -8,7 +8,7 @@
 			</ion-buttons>
 		</ion-toolbar>
 	</ion-header>
-	<ion-content class="ion-padding-horizontal">
+	<ion-content class="filter-container ion-padding-horizontal">
 		<h2>Filtrer pokemon list</h2>
 		<ion-item>
 			<ion-label position="floating">Select movement number</ion-label>
@@ -84,13 +84,25 @@ import { pokemonStore } from '@/store/pokemon.store';
 
 </script>
 <style scoped lang="scss">
-	ion-modal{
+	
 		ion-content{
 			--background: white;
 			--padding-end: 24px;
     	--padding-start: 24px;
+
+			&.filter-container{
+
+			
+
+				ion-item{
+					margin-bottom: 2vh;
+					--background: #ececf2;
+					--border-radius: 8px 8px 0px 0px;
+					--color: #8D91A5;
+				}
+			}
 		}
-	}
+	
 
 	ion-toolbar{
 		--background: transparent;
