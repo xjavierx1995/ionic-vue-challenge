@@ -53,6 +53,16 @@
 			}
 		});
 		movesDetailed.value = await Promise.all(promises);
+
+		movesDetailed.value.sort((a, b) => {
+			if (a.type < b.type) {
+				return -1;
+			}
+			if (a.type > b.type) {
+				return 1;
+			}
+			return 0;
+		});
 		loading.value = false;
 	}
 

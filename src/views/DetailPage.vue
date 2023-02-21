@@ -67,7 +67,7 @@
 						font-family: 'Roboto';
 						font-style: normal;
 						font-weight: 400;
-						font-size: 16px;
+						font-size: 2vh;
 						line-height: 24px;
 
 						--indicator-color: #4361EE;
@@ -86,7 +86,7 @@
 			.header-detail{
 				background: #ececf2;
 				width: 100%;
-				height: 237px;
+				height: 25vh;
 				display: flex;
 				justify-content: center;
 				align-items: center;
@@ -98,7 +98,7 @@
 					line-height: 32px;
 					color: #3B3B3B;
 					position: absolute;
-					top: 40px;
+					top: 1vh;
 					display: flex;
 					gap: 10px;
 
@@ -111,8 +111,10 @@
 					}
 				}
 				img{
-					width: 146px;
-					height: 143px;
+					// width: 146px;
+					// height: 143px;
+					width: 20vh;
+					height: 20vh;
 				}
 			}
 		}
