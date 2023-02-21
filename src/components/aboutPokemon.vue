@@ -30,6 +30,7 @@
 			</ion-item>
 		</ion-list>
 	</div>
+	<ChartInfo :pokemon-detail="pokemonDetail"/>
 </template>
 <script setup lang="ts">
 	import { IonList, IonLabel, IonItem } from '@ionic/vue'
@@ -37,6 +38,7 @@
 	import { toRefs } from 'vue';
 	import { useRouter } from 'vue-router';
 	import { TypesIcons } from '@/helpers/types';
+	import ChartInfo from './chartInfo.vue';
 	
 	const router = useRouter();
 	
@@ -52,8 +54,9 @@
 </script>
 <style scoped lang="scss">
 	.info{
-		margin-left: 20px;
-    margin-top: 30px;
+		
+		display: flex;
+		justify-content: center;
 		ion-list{
 			ion-item{
 
@@ -78,7 +81,7 @@
 					color: #3B3B3B;
 				}
 				.value-chip{
-					margin-left: 1vh;
+					margin-right: 1vh;
 					font-family: 'Roboto';
 					border-radius: 2px;
 					color: #fdfdfd; 
