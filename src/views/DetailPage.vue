@@ -3,7 +3,7 @@
 		<ion-header class="ion-no-border">
 			<ion-toolbar mode="md">
 				<ion-buttons slot="start">
-					<ion-button @click="router.go(-1)" fill="clear">
+					<ion-button @click="router.push({name: 'Home'})" fill="clear">
 						<ion-icon slot="icon-only" :icon="arrowBack"></ion-icon>
 					</ion-button>
 				</ion-buttons>
@@ -61,9 +61,6 @@
 				width: 230px;
 				--background: #fdfdfd;
 
-				ion-segment-button{
-
-				}
 
 				ion-segment-button {
 					font-family: 'Roboto';
@@ -82,17 +79,6 @@
 						top: auto;
 					}
 				}
-
-				/* ion-segment-button::part(indicator-background) {
-					border-radius: 20px;
-				} */
-
-				/* Material Design styles */
-				/* ion-segment-button.md {
-					--color: #000;
-					--color-checked: #08a391;
-					--indicator-height: 4px;
-				} */
 			}
 		}
 	

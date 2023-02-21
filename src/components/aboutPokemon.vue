@@ -24,7 +24,9 @@
 			</ion-item>
 			<ion-item>
 				<div class="attribute">Type:</div> 
-				<div class="value ion-text-capitalize" v-for="(item, index) in pokemonDetail.types" :key="`types-${index}`"> {{ item.type.name }} </div>
+				<div class="value-chip ion-text-capitalize"
+					:style="`background-color:${TypesIcons[item.type.name].color};`"
+					v-for="(item, index) in pokemonDetail.types" :key="`types-${index}`"> {{ item.type.name }} </div>
 			</ion-item>
 		</ion-list>
 	</div>
@@ -32,8 +34,9 @@
 <script setup lang="ts">
 	import { IonList, IonLabel, IonItem } from '@ionic/vue'
 	import { PokemonDetail } from '@/interfaces/pokemonDetail';
-	import { toRefs, onMounted } from 'vue';
+	import { toRefs } from 'vue';
 	import { useRouter } from 'vue-router';
+	import { TypesIcons } from '@/helpers/types';
 	
 	const router = useRouter();
 	
@@ -54,15 +57,15 @@
 		ion-list{
 			ion-item{
 
-				height: 34px;
+				height: 40px;
 				.attribute{
 					font-family: 'Roboto';
 					font-weight: 400;
-					font-size: 16px;
+					font-size: 1.9vh;
 					line-height: 22px;
 					color: #8D91A5;
 
-					width: 100px;
+					width: 12vh;
     			white-space: nowrap;
 				}
 
@@ -70,9 +73,18 @@
 					margin-right: 12px;
 					font-family: 'Roboto';
 					font-weight: 600;
-					font-size: 16px;
+					font-size: 1.9vh;
 					line-height: 22px;
 					color: #3B3B3B;
+				}
+				.value-chip{
+					margin-left: 1vh;
+					font-family: 'Roboto';
+					border-radius: 2px;
+					color: #fdfdfd; 
+					padding: 5px; 
+					font-weight: 400;
+					font-size: 1.7vh
 				}
 			}
 		}

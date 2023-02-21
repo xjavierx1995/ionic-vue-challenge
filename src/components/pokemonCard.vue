@@ -45,7 +45,7 @@
 
 	function setSelectedPokemon() {
 		store.pokemonSelected = pokemon.value;
-		router.push({name: 'Detail'})
+		router.push({name: 'Detail', replace: true})
 	}
 </script>
 <style scoped lang="scss">
@@ -53,7 +53,7 @@
 	
 	ion-card{
 		--background: #fdfdfd;
-		margin: 24px 0;
+		margin: 5px;
 		border-radius: 16px;
 		box-shadow: none !important;
 		ion-card-title{

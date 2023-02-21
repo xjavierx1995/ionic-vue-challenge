@@ -8,15 +8,24 @@
 					<ion-card-title>{{ store.total }} resultados</ion-card-title>
 				</ion-card-header>
 			</ion-card>
-				<div v-if="!store.isLoading" >
-					<PokemonCard 
+			<ion-grid>
+				<ion-row v-if="!store.isLoading">
+					<ion-col  size-sm="4" 
 						v-for="pokemon in (store.isFilterActive ? store.paginatedLocalData : store.pokemonList)" 
 						:key="pokemon.name" 
-						:pokemon="pokemon" />
-				</div>
-				<div v-else>
-					<PokemonCardLoading v-for="i in 10" :key="i"/>
-				</div>
+					>
+						<PokemonCard :pokemon="pokemon"/>
+					</ion-col>
+				</ion-row>
+
+				<ion-row v-else>
+					<ion-col v-for="i in 10" :key="i">
+						<PokemonCardLoading />
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+			
+				
 		</ion-content>
 
 		<ion-footer class="ion-no-border" mode="md">
@@ -28,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-	import { IonContent, IonPage, IonToolbar, IonFooter, IonCard, IonCardHeader, IonCardTitle } from '@ionic/vue';
+	import { IonContent, IonPage, IonToolbar, IonFooter, IonCard, IonCardHeader, IonCardTitle, IonGrid, IonRow, IonCol } from '@ionic/vue';
 	import PokemonCard from '@/components/pokemonCard.vue';
 	import PokemonCardLoading from '@/components/pokemonCardLoading.vue';
 	import { onMounted } from 'vue';
@@ -44,18 +53,5 @@
 </script>
 
 <style scoped lang="scss">
-ion-card{
-		--background: #fdfdfd;
-		margin: 24px 0;
-		border-radius: 16px;
-		box-shadow: none !important;
-		ion-card-title{
-			font-family: 'Readex Pro';
-			font-weight: 500;
-			color: #55596D;
-			font-size: 20px;
-			line-height: 28px;
-		}
-	}
 
 </style>

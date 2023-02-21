@@ -41,7 +41,7 @@
 	const movesDetailed: Ref<any[]> = ref([]);
 	const loading = ref(false);
 
-	async function getMovesDetails(e: string) {				
+	async function getMovesDetails() {				
 		loading.value = true;
 		const promises = pokemonMoves.value.map(async (e): Promise<any> => {
 
@@ -57,8 +57,7 @@
 	}
 
 	onMounted(async () => {
-		console.log('hola');
-		await getMovesDetails('karate-chop');
+		await getMovesDetails();
 	})
 	
 </script>
