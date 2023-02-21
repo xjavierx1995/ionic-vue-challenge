@@ -1,5 +1,5 @@
 <template>
-	<ion-card button>
+	<ion-card button @click="setSelectedPokemon()">
 		<div class="image-container">
 			<img 
 			style="height: 159px;"
@@ -7,7 +7,7 @@
 			/>
 		</div>
 		<ion-card-header>
-			<ion-card-title>{{ pokemon.name }}</ion-card-title>
+			<ion-card-title class="ion-text-capitalize">{{ pokemon.name }}</ion-card-title>
 			<ion-card-subtitle>#{{ pokemon.detail.order }}</ion-card-subtitle>
 		</ion-card-header>
 
@@ -31,12 +31,22 @@
 	import { toRefs, defineProps } from 'vue';
 	import { Pokemon } from '@/interfaces/pokemon';
 	import { TypesIcons } from '@/helpers/types';
+	import { pokemonStore } from '@/store/pokemon.store';
+	import { useRouter } from 'vue-router';
+	
 
 	const props = defineProps<{ 
 		pokemon: Pokemon
 	}>();	
 
 	const { pokemon } = toRefs(props);
+	const store = pokemonStore();
+	const router = useRouter();
+
+	function setSelectedPokemon() {
+		store.pokemonSelected = pokemon.value;
+		router.push({name: 'Detail'})
+	}
 </script>
 <style scoped lang="scss">
 	@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@500&display=swap');

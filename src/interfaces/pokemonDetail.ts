@@ -2,11 +2,16 @@ export interface PokemonDetail{
 	id: any;
 	name: string;
 	base_experience: number;
-	height: any;
+	height: number;
 	is_default: any;
 	order: any;
-	weight: any;
-	abilities: any;
+	weight: number;
+	abilities: {
+		ability: {
+			name: string,
+			url: string
+		},
+	}[];
 	forms: any;
 	game_indices: any;
 	held_items: any;
@@ -17,7 +22,10 @@ export interface PokemonDetail{
 			url: string;
 		}
 	}[];
-	species: any;
+	species: {
+		name: string;
+		url: string;
+	};
 	sprites: {
 		back_default: string;
 		back_female: string;

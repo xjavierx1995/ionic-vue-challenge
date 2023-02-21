@@ -6,6 +6,7 @@ export interface PokemonState{
 	filters: PokemonFilter;
 	isFilterActive: boolean;
 	allPokemon: Pokemon[];
+	pokemonSelected: Pokemon;
 	page: number;
 	pageSize: number;
 	total: number;

@@ -3,23 +3,29 @@ import { PokemonState } from "@/interfaces/pokemonList"
 import { ListResponse } from "@/interfaces/ListResponse";
 import { defineStore } from "pinia"
 import axios from '../plugins/axios';
+import { PokemonDetail } from "@/interfaces/pokemonDetail";
 
 export const pokemonStore = defineStore('pokemon', {
-  state: () => ({
-		pokemonList: [],
-		allPokemon: [],
-		page: 1,
-		pageSize: 10,
-		total: 0,
-		totalPages: 0,
-		isLoading: false,
-		isFilterActive: false,
-		filters: {
-			experience: 0,
-			moves: [],
-			name: ''
+  state: (): PokemonState => {
+		return {
+
+			pokemonList: [],
+			allPokemon: [],
+			pokemonSelected: null as unknown as Pokemon,
+			page: 1,
+			pageSize: 10,
+			total: 0,
+			totalPages: 0,
+			isLoading: false,
+			isFilterActive: false,
+			filters: {
+				experience: 0,
+				moves: [],
+				name: ''
+			}
 		}
-	} as PokemonState),
+		
+	},
   getters: {
     getPokemonList: (state) => state.pokemonList,
     hasFilter: (state) => {

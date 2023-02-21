@@ -21,7 +21,6 @@
 			
 		</ion-toolbar>
 	</ion-header>
-	<!-- <FilterModal/> -->
 </template>
 <script setup lang="ts">
 	import { pokemonStore } from '@/store/pokemon.store';
@@ -32,18 +31,14 @@
 	const store = pokemonStore();
 
 	function search() {
-		console.log('buscar');
-		
 		store.getPokemonsFilter();
 	}
 
 	async function openModal() {
 		const modal = await modalController.create({
-          component: FilterModal,
-        });
-        modal.present();
-
-        const { data, role } = await modal.onWillDismiss();
+			component: FilterModal,
+		});
+		modal.present();
 
 	}
 </script>
