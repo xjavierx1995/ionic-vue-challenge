@@ -1,9 +1,9 @@
 <template>
-	<ion-page>
+	<ion-page class="detail-page">
 		<ion-header class="ion-no-border">
 			<ion-toolbar mode="md">
 				<ion-buttons slot="start">
-					<ion-button @click="router.push({name: 'Home'})" fill="clear">
+					<ion-button @click="router.go(-1)" fill="clear">
 						<ion-icon slot="icon-only" :icon="arrowBack"></ion-icon>
 					</ion-button>
 				</ion-buttons>
@@ -51,71 +51,73 @@
 
 </script>
 <style setup lang="scss">
-	ion-content{
-		--background: #fdfdfd;
+	.detail-page{
+		ion-content{
+			--background: #fdfdfd;
 
-		.select-segment{
-			padding: 0 16px;
-			ion-segment {
-				height: 70px;
-				width: 230px;
-				--background: #fdfdfd;
+			.select-segment{
+				padding: 0 16px;
+				ion-segment {
+					height: 70px;
+					width: 230px;
+					--background: #fdfdfd;
 
 
-				ion-segment-button {
-					font-family: 'Roboto';
-					font-style: normal;
-					font-weight: 400;
-					font-size: 16px;
-					line-height: 24px;
+					ion-segment-button {
+						font-family: 'Roboto';
+						font-style: normal;
+						font-weight: 400;
+						font-size: 16px;
+						line-height: 24px;
 
-					--indicator-color: #4361EE;
-					--color: #8D91A5;
-					--color-checked: #4361EE;
-					--indicator-height: 4px;
+						--indicator-color: #4361EE;
+						--color: #8D91A5;
+						--color-checked: #4361EE;
+						--indicator-height: 4px;
 
-					&::part(indicator){
-						// background-color: red;
-						top: auto;
+						&::part(indicator){
+							// background-color: red;
+							top: auto;
+						}
 					}
 				}
 			}
-		}
-	
-		.header-detail{
-			background: #ececf2;
-			width: 100%;
-			height: 237px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-
-			.pokemon-name{
-				font-family: 'Readex Pro';
-				font-weight: 600;
-				font-size: 24px;
-				line-height: 32px;
-				color: #3B3B3B;
-				position: absolute;
-				top: 40px;
+		
+			.header-detail{
+				background: #ececf2;
+				width: 100%;
+				height: 237px;
 				display: flex;
-				gap: 10px;
+				justify-content: center;
+				align-items: center;
 
-				.order{
+				.pokemon-name{
 					font-family: 'Readex Pro';
-					font-weight: 500;
-					font-size: 16px;
+					font-weight: 600;
+					font-size: 24px;
 					line-height: 32px;
 					color: #3B3B3B;
+					position: absolute;
+					top: 40px;
+					display: flex;
+					gap: 10px;
+
+					.order{
+						font-family: 'Readex Pro';
+						font-weight: 500;
+						font-size: 16px;
+						line-height: 32px;
+						color: #3B3B3B;
+					}
+				}
+				img{
+					width: 146px;
+					height: 143px;
 				}
 			}
-			img{
-				width: 146px;
-				height: 143px;
-			}
 		}
-	}
-	ion-toolbar{
-		--background: #ececf2;
+		ion-toolbar{
+			--background: #ececf2;
+		}
 	}
 </style>

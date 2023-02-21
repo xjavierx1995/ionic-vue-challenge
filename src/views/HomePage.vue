@@ -8,22 +8,22 @@
 					<ion-card-title>{{ store.total }} resultados</ion-card-title>
 				</ion-card-header>
 			</ion-card>
-			<ion-grid>
-				<ion-row v-if="!store.isLoading">
-					<ion-col  size-sm="4" 
+			
+				<div class="row ion-padding-top" v-if="!store.isLoading">
+					<div class="col"  size-sm="4" 
 						v-for="pokemon in (store.isFilterActive ? store.paginatedLocalData : store.pokemonList)" 
 						:key="pokemon.name" 
 					>
 						<PokemonCard :pokemon="pokemon"/>
-					</ion-col>
-				</ion-row>
+					</div>
+				</div>
 
-				<ion-row v-else>
-					<ion-col v-for="i in 10" :key="i">
+				<div class="row" v-else>
+					<div class="col" v-for="i in 10" :key="i">
 						<PokemonCardLoading />
-					</ion-col>
-				</ion-row>
-			</ion-grid>
+					</div>
+				</div>
+			
 			
 				
 		</ion-content>
@@ -53,5 +53,50 @@
 </script>
 
 <style scoped lang="scss">
+// Definir variables para el grid
+$grid-columns: 12;
+$grid-gutter: 16px;
 
+// Definir el mixin para crear columnas
+@mixin make-column($columns, $total-columns: $grid-columns) {
+  flex: 0 0 auto;
+  width: (100% / $total-columns) * $columns;
+  margin-bottom: $grid-gutter;
+}
+
+// Definir el mixin para el grid
+@mixin make-grid($columns: $grid-columns, $gutter: $grid-gutter) {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -$gutter;
+  & > * {
+    padding-left: $gutter;
+  }
+}
+
+// Crear el grid para dispositivos móviles
+.row {
+  @include make-grid();
+  .col {
+    @include make-column(12);
+  }
+}
+
+// Agregar estilos para dispositivos de escritorio
+@media screen and (min-width: 768px) {
+  .row {
+    .col {
+      @include make-column(4);
+    }
+  }
+}
+
+// Agregar estilos para pantallas más grandes
+@media screen and (min-width: 992px) {
+  .row {
+    .col {
+      @include make-column(3);
+    }
+  }
+}
 </style>

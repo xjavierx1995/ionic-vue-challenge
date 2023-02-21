@@ -45,7 +45,7 @@
 
 	function setSelectedPokemon() {
 		store.pokemonSelected = pokemon.value;
-		router.push({name: 'Detail', replace: true})
+		router.push({name: 'Detail'})
 	}
 </script>
 <style scoped lang="scss">
