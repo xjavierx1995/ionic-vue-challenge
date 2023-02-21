@@ -3,7 +3,7 @@
 		<HeaderSearch></HeaderSearch>
 
 		<ion-content>
-			<ion-card v-if="store.hasFilter">
+			<ion-card v-if="store.hasFilter && !store.isLoading">
 				<ion-card-header>
 					<ion-card-title>{{ store.total }} resultados</ion-card-title>
 				</ion-card-header>

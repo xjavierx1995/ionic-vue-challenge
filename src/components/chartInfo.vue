@@ -68,9 +68,13 @@
 						display: false
 					}
 				},
-				/* legend: {
-						display: false
-				}, */
+				font:{
+					family: 'Roboto',
+					lineHeight: '16px',
+					size: 500,
+					weight: '500',
+				},
+				
 				indexAxis: 'y'
 			}
 		})
@@ -78,11 +82,6 @@
   onMounted(() => setupChart())
 </script>
 <style lang="scss">
-	/* #myChart {
-		width: 100%;
-		height: 400px;
-	} */
-
 	.chart-container{
 		max-width: 43vh;
 		margin: auto;
