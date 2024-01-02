@@ -1,55 +1,58 @@
 <template>
-	<ion-header >
+	<ion-header>
 		<ion-toolbar class="ion-no-border">
-			<img src="assets/images/pokeball_background.png">
+			<div class="custom-toolbar">
+				<img src="assets/images/pokeball_background.png">
 
-			<div class="title">
-			
-				<h2>What pokemon are you looking for?</h2>
-			</div>
+				<div class="title">
 
-			<div class="search">
-				<ion-item fill="solid">
-					<ion-label position="floating">Search pokemon</ion-label>
-					<ion-input @ionChange="search" :debounce="1500" v-model="store.filters.name"></ion-input>
-					<ion-icon :icon="searchOutline" slot="end"></ion-icon>
-				</ion-item>
-				<ion-button fill="clear" id="open-modal" @click="openModal()">
-					<ion-icon slot="icon-only" :icon="options"></ion-icon>
-				</ion-button>
+					<h2>What pokemon are you looking for?</h2>
+				</div>
+
+				<div class="search">
+					<ion-item fill="solid">
+						<ion-label position="floating">Search pokemon</ion-label>
+						<ion-input @ionChange="search" :debounce="1500" v-model="store.filters.name"></ion-input>
+						<ion-icon :icon="searchOutline" slot="end"></ion-icon>
+					</ion-item>
+					<ion-button fill="clear" id="open-modal" @click="openModal()">
+						<ion-icon slot="icon-only" :icon="options"></ion-icon>
+					</ion-button>
+				</div>
 			</div>
-			
 		</ion-toolbar>
 	</ion-header>
 </template>
 <script setup lang="ts">
-	import { pokemonStore } from '@/store/pokemon.store';
-	import { IonHeader, IonToolbar, IonIcon, IonItem, IonInput, IonLabel, IonButton, modalController } from '@ionic/vue';
-	import { searchOutline, options } from 'ionicons/icons'
-	import FilterModal from '@/components/filltersModal.vue'
+import { pokemonStore } from '@/store/pokemon.store';
+import { IonHeader, IonToolbar, IonIcon, IonItem, IonInput, IonLabel, IonButton, modalController } from '@ionic/vue';
+import { searchOutline, options } from 'ionicons/icons'
+import FilterModal from '@/components/filltersModal.vue'
 
-	const store = pokemonStore();
+const store = pokemonStore();
 
-	function search() {
-		store.getPokemonsFilter();
-	}
+function search() {
+	store.getPokemonsFilter();
+}
 
-	async function openModal() {
-		const modal = await modalController.create({
-			component: FilterModal,
-		});
-		modal.present();
+async function openModal() {
+	const modal = await modalController.create({
+		component: FilterModal,
+	});
+	modal.present();
 
-	}
+}
 </script>
 <style scoped lang="scss">
-	ion-toolbar{
-		--background: #072AC8;
-		--min-height: 234px;
-		--color: white;
-		--border-style: none;
-		--border-width: 0;
-		img{
+ion-toolbar {
+	--background: #072AC8;
+	--min-height: 234px;
+	--color: white;
+	--border-style: none;
+	--border-width: 0;
+
+	.custom-toolbar {
+		img {
 			position: absolute;
 			right: 0;
 			top: 38px;
@@ -57,7 +60,7 @@
 			opacity: 0.3;
 		}
 
-		.title{
+		.title {
 			flex-direction: column;
 			padding: 0px;
 			gap: 8px;
@@ -66,20 +69,20 @@
 			margin: 16px;
 		}
 
-		.search{
+		.search {
 			display: flex;
 			gap: 25px;
 			justify-content: center;
 			align-items: center;
 		}
 
-		ion-button{
+		ion-button {
 			--color: #fcfcfc;
 		}
 
-		
-		ion-item{
-			.item-has-focus{
+
+		ion-item {
+			.item-has-focus {
 				color: #fcfcfc;
 			}
 
@@ -97,17 +100,33 @@
 			--detail-icon-color: #fcfcfc;
 			--detail-icon-font-size: 16px;
 
-			ion-label{
+			ion-label {
 				--color: #fcfcfc;
 			}
 
 			ion-label:focus {
 				color: red;
 			}
-			ion-icon{
+
+			ion-icon {
 				color: #fcfcfc;
 				margin-bottom: 0;
 			}
 		}
 	}
+}
+
+@media (min-width: 768px) {
+	ion-toolbar {
+		--min-height: 0px;
+
+		.custom-toolbar {
+			display: flex;
+
+			img {
+				top: -43px;
+			}
+		}
+	}
+}
 </style>
